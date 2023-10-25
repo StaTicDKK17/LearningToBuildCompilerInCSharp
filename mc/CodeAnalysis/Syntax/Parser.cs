@@ -107,11 +107,13 @@ internal sealed class Parser
         else if (Current.Kind == SyntaxKind.TrueKeyword ||
                  Current.Kind == SyntaxKind.FalseKeyword)
         {
-            var value = Current.Kind == SyntaxKind.TrueKeyword;
-            return new LiteralExpressionSyntax(Current, value);
+            var keywordToken = NextToken();
+            var value = keywordToken.Kind == SyntaxKind.TrueKeyword;
+            return new LiteralExpressionSyntax(keywordToken, value);
+        } else
+        {
+            var numberToken = MatchToken(SyntaxKind.NumberToken);
+            return new LiteralExpressionSyntax(numberToken);
         }
-
-        var numberToken = MatchToken(SyntaxKind.NumberToken);
-        return new LiteralExpressionSyntax(numberToken);
     }
 }

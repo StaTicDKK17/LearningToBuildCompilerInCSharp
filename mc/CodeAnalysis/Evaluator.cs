@@ -1,5 +1,4 @@
 ﻿using mc.CodeAnalysis.Binding;
-using mc.CodeAnalysis.Syntax;
 
 namespace Minsk.CodeAnalysis;
 
@@ -12,26 +11,27 @@ internal sealed class Evaluator
 
     public readonly BoundExpression _root;
 
-    public int Evalate()
+    public object Evalate()
     {
         return EvaluateExpression(_root);
     }
 
-    private int EvaluateExpression(BoundExpression node)
+    private object EvaluateExpression(BoundExpression node)
     {
         if (node is BoundLiteralExpression n)
-            return (int)n.Value;
+            return n.Value;
 
         if (node is BoundUnaryExpression u)
         {
             var operand = EvaluateExpression(u.Operand);
 
-            return u.OperatorKind switch
+            return u.Op.Kind switch
             {
-                BoundUnaryOperatorKind.Identity => operand,
-                BoundUnaryOperatorKind.Negation => -operand,
-                _ => throw new Exception($"Unexpected unary operator {u.OperatorKind}"),
-            };
+                BoundUnaryOperatorKind.Identity => (int)operand,
+                BoundUnaryOperatorKind.Negation => -(int)operand,
+                BoundUnaryOperatorKind.LogicalNegation => !(bool)operand,
+                _ => throw new Exception($"Unexpected unary operator {u.Op}"),
+            }; 
         }
 
         if (node is BoundBinaryExpression b)
@@ -39,18 +39,26 @@ internal sealed class Evaluator
             var left = EvaluateExpression(b.Left);
             var right = EvaluateExpression(b.Right);
 
-            switch (b.OperatorKind)
+            switch (b.Op.Kind)
             {
                 case BoundBinaryOperatorKind.Addition:
-                    return left + right;
+                    return (int)left + (int)right;
                 case BoundBinaryOperatorKind.Subtraction:
-                    return left - right;
+                    return (int)left - (int)right;
                 case BoundBinaryOperatorKind.Multiplication:
-                    return left * right;
+                    return (int)left * (int)right;
                 case BoundBinaryOperatorKind.Division:
-                    return left / right;
+                    return (int)left / (int)right;
+                case BoundBinaryOperatorKind.LogicalAnd:
+                    return (bool)left && (bool)right;
+                case BoundBinaryOperatorKind.LogicalOr:
+                    return (bool)left || (bool)right;
+                case BoundBinaryOperatorKind.Equals:
+                    return Equals(left, right);
+                case BoundBinaryOperatorKind.NotEquals:
+                    return !Equals(left, right);
                 default:
-                    throw new Exception($"Unexpected binary operator {b.OperatorKind}");
+                    throw new Exception($"Unexpected binary operator {b.Op}");
             }
         }
 

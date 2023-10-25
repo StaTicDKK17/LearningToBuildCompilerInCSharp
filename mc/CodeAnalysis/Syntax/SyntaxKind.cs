@@ -11,7 +11,12 @@ public enum SyntaxKind
     MinusToken,
     StarToken,
     SlashToken,
+    BangToken,
+    AmpersandAmpersandToken,
+    PipePipeToken,
     OpenParenthesisToken,
+    EqualsEqualsToken,
+    BangEqualsToken,
     CloseParenthesisToken,
     IdentifierToken,
 

@@ -21,3 +21,10 @@ D:\C#\LearningToBuildACompiler\mc\obj\Debug\net6.0\mc.csproj.CoreCompileInputs.c
 D:\C#\LearningToBuildACompiler\mc\obj\Debug\net6.0\mc.dll
 D:\C#\LearningToBuildACompiler\mc\obj\Debug\net6.0\refint\mc.dll
 D:\C#\LearningToBuildACompiler\mc\obj\Debug\net6.0\mc.pdb
+D:\C#\LearningToBuildACompiler\mc\bin\Debug\net6.0\mc.exe
+D:\C#\LearningToBuildACompiler\mc\bin\Debug\net6.0\mc.deps.json
+D:\C#\LearningToBuildACompiler\mc\bin\Debug\net6.0\mc.runtimeconfig.json
+D:\C#\LearningToBuildACompiler\mc\bin\Debug\net6.0\mc.dll
+D:\C#\LearningToBuildACompiler\mc\bin\Debug\net6.0\mc.pdb
+D:\C#\LearningToBuildACompiler\mc\obj\Debug\net6.0\mc.genruntimeconfig.cache
+D:\C#\LearningToBuildACompiler\mc\obj\Debug\net6.0\ref\mc.dll
