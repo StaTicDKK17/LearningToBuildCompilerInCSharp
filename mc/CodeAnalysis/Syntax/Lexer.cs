@@ -1,6 +1,4 @@
-﻿using System.Reflection.Metadata.Ecma335;
-
-namespace mc.CodeAnalysis.Syntax;
+﻿namespace mc.CodeAnalysis.Syntax;
 
 internal class Lexer
 {
